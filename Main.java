@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 import javax.swing.JFrame;
 
 
@@ -13,11 +15,12 @@ public class Main {
 		JFrame main = new JFrame("Worms");
 		game = new Game(2);
 		screen = new Screen(game);
-		main.setSize(600,400);
+		main.setSize(800,600);
 		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.add(screen);
 		screen.requestFocus();
 		main.setVisible(true);
+		main.getContentPane().setBackground(Color.CYAN);
 		mainloop();
 	}
 

@@ -1,8 +1,8 @@
 
 public class Game {
-	private WormGroup[] groups;
-	private Projectile projectile;
-	private World world;
+	public WormGroup[] groups;
+	public Projectile projectile;
+	public World world;
 	public Game(int teams) {
 		groups = new WormGroup[teams];
 		world = new World();

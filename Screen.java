@@ -16,6 +16,7 @@ public class Screen extends JComponent{
 	
 	public void paintComponent(Graphics g) {
 		graphics = g;
+		game.world.draw(this);
 	}
 
 }
