@@ -1,26 +1,56 @@
 import java.awt.Color;
 
+import java.awt.DisplayMode;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
+import java.awt.Window;
+
 import javax.swing.JFrame;
 
 
 public class Main {
 	private static Game game;
 	private static Screen screen;
+	public static GraphicsDevice vc;
 
 	public static void main(String[] args) throws Exception {
 		playGame();
 	}
 
+	private static void setFullScreen(JFrame window)
+	{
+		window.setUndecorated(true);
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.setResizable(false);
+		window.setVisible(true);
+		window.getContentPane().setBackground(Color.CYAN);
+		vc.setFullScreenWindow(window);
+	}
+	public static Window getFullScreenWindow()
+	{
+		return vc.getFullScreenWindow();
+	}
+	
+	public static void restoreScreen()
+	{
+		Window w = getFullScreenWindow();
+		if(w != null)
+			w.dispose();
+		vc.setFullScreenWindow(null);
+	}
+	
 	private static void playGame() throws Exception {
+		
+		GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		vc = env.getDefaultScreenDevice();
+		
 		JFrame main = new JFrame("Worms");
 		game = new Game(2);
 		screen = new Screen(game);
-		main.setSize(800,600);
-		main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		main.add(screen);
+		main.addKeyListener(new Kelet(screen));
 		screen.requestFocus();
-		main.setVisible(true);
-		main.getContentPane().setBackground(Color.CYAN);
+		setFullScreen(main);
 		mainloop();
 	}
 

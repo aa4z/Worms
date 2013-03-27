@@ -11,7 +11,6 @@ public class Screen extends JComponent{
 	public Screen(Game game) {
 		super();
 		this.game = game;
-		addKeyListener(new Kelet(this));
 	}
 	
 	public void paintComponent(Graphics g) {
